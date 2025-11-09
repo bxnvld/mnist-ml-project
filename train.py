@@ -37,7 +37,7 @@ def create_model():
     
     return model
 
-def train_and_save_model(version='v1.0.0', epochs=10):
+def train_and_save_model(version='v2.0.0', epochs=10):
     """Train model and save with version info"""
     
     print(f"🚀 Training MNIST model version {version}...")
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     import sys
     
     # Get version from command line or use default
-    version = sys.argv[1] if len(sys.argv) > 1 else 'v1.0.0'
+    version = sys.argv[1] if len(sys.argv) > 1 else 'v2.0.0'
     epochs = int(sys.argv[2]) if len(sys.argv) > 2 else 10
     
     print("="*60)
