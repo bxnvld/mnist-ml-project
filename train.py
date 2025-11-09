@@ -19,12 +19,12 @@ def create_model():
         # Convolutional layers
         keras.layers.Conv2D(32, (3, 3), activation='relu'),
         keras.layers.MaxPooling2D((2, 2)),
-        #keras.layers.Conv2D(64, (3, 3), activation='relu'),
-        #keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(64, (3, 3), activation='relu'),
+        keras.layers.MaxPooling2D((2, 2)),
         
         # Dense layers
         keras.layers.Flatten(),
-        #keras.layers.Dense(128, activation='relu'),
+        keras.layers.Dense(128, activation='relu'),
         keras.layers.Dropout(0.2),
         keras.layers.Dense(10, activation='softmax')
     ])
@@ -64,7 +64,7 @@ def train_and_save_model(version='v1.0.0', epochs=10):
     history = model.fit(
         X_train, y_train,
         epochs=epochs,
-        batch_size=64,
+        batch_size=128,
         validation_split=0.1,
         verbose=1
     )
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     
     # Get version from command line or use default
     version = sys.argv[1] if len(sys.argv) > 1 else 'v1.0.0'
-    epochs = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+    epochs = int(sys.argv[2]) if len(sys.argv) > 2 else 10
     
     print("="*60)
     print("🔢 MNIST Digit Recognition - Model Training")
