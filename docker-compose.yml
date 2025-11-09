@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  mnist-v1:
+    build: .
+    container_name: mnist-model-v1
+    ports:
+      - "5001:5000"
+    environment:
+      - MODEL_VERSION=v1
+      - PORT=5000
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
+
+  mnist-v2:
+    build: .
+    container_name: mnist-model-v2
+    ports:
+      - "5002:5000"
+    environment:
+      - MODEL_VERSION=v2
+      - PORT=5000
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
+```
+
+---
+
+## **requirements.txt**
+```
+tensorflow==2.15.0
+flask==3.0.0
+numpy==1.24.3
+pillow==10.1.0
+gunicorn==21.2.0
+```
+
+---
+
+## **.gitignore**
+```
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models (optional - comment out if you want to commit trained models)
+# models/*.h5
+# models/*.json
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local

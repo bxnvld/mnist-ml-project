@@ -1,0 +1,16 @@
+{
+  "version": "v1.0.0",
+  "timestamp": "20251109_135515",
+  "accuracy": 0.9915000200271606,
+  "loss": 0.03048749454319477,
+  "epochs": 15,
+  "training_samples": 60000,
+  "test_samples": 10000,
+  "architecture": "CNN",
+  "input_shape": [
+    28,
+    28,
+    1
+  ],
+  "output_classes": 10
+}
