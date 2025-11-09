@@ -11,6 +11,8 @@ import json
 from PIL import Image
 import io
 import base64
+from scipy.ndimage import center_of_mass
+from scipy.ndimage import shift
 
 app = Flask(__name__)
 
@@ -429,11 +431,23 @@ def predict():
         image = image.resize((28, 28))
         image_array = np.array(image)
         
+        # # Invert colors (drawing is black on white, MNIST is white on black)
+        # image_array = 255 - image_array
+        
+        # # Normalize
+        # image_array = image_array.astype('float32') / 255.0
+        # image_array = image_array.reshape(1, 28, 28, 1)
+
         # Invert colors (drawing is black on white, MNIST is white on black)
         image_array = 255 - image_array
-        
-        # Normalize
         image_array = image_array.astype('float32') / 255.0
+
+        # Center the digit in the 28x28 image
+        cy, cx = center_of_mass(image_array)
+        if not (np.isnan(cy) or np.isnan(cx)):  # avoid NaN when image is blank
+            shift_y, shift_x = 14 - cy, 14 - cx
+            image_array = shift(image_array, shift=(shift_y, shift_x))
+
         image_array = image_array.reshape(1, 28, 28, 1)
         
         # Predict

@@ -17,7 +17,7 @@ ENV/
 .idea/
 
 # Models
-*.h5
+#*.h5
 *.hdf5
 
 # Misc
